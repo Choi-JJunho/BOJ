@@ -1,8 +1,7 @@
 def solution(name, yearning, photo):
-    dic = {}
+    dic = dict(zip(name, yearning))
     answer = []
-    for i, j in zip(name, yearning):
-        dic[i] = j
+    
     for k in photo:
         score = 0
         for l in k:
