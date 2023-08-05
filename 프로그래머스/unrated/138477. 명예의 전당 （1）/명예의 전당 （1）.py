@@ -1,12 +1,11 @@
 from collections import deque
 def solution(k, score):
+    tmp = []
     answer = []
-    tmp = deque()
     for i in score:
         tmp.append(i)
-        tmp = sorted(tmp,reverse=True)
         if len(tmp) > k:
-            tmp.pop()
-        answer.append(tmp[len(tmp)-1])
+            tmp.remove(min(tmp))
+        answer.append(min(tmp))
         
     return answer
