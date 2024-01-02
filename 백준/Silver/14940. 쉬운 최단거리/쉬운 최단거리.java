@@ -1,5 +1,11 @@
-import java.io.*;
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 class Main {
 
@@ -66,13 +72,12 @@ class Main {
                 int nextX = current.x + dx[i];
                 int nextY = current.y + dy[i];
 
-                if (nextX < 1 || nextY < 1 || nextX > n || nextY > m || visit[nextX][nextY] || arr[nextX][nextY] == 0) {
-                    continue;
+                if (nextX >= 1 && nextY >= 1 && nextX <= n && nextY <= m
+                    && !visit[nextX][nextY] && arr[nextX][nextY] != 0) {
+                    route[nextX][nextY] = route[current.x][current.y] + 1;
+                    visit[nextX][nextY] = true;
+                    queue.add(new Point(nextX, nextY));
                 }
-
-                route[nextX][nextY] = route[current.x][current.y] + 1;
-                visit[nextX][nextY] = true;
-                queue.add(new Point(nextX, nextY));
             }
         }
     }
