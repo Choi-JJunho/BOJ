@@ -1,32 +1,31 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+class Main {
+
+    static int[][] dp;
+    public static void main(String args[]) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        long[][] dp = new long[t + 1][10];
-        for (int i = 0; i <= 9; i++) {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.parseInt(br.readLine());
+        dp = new int[n+1][10];
+        for (int i = 0; i < 10; i++) {
             dp[1][i] = 1;
         }
-
-        for (int i = 2; i <= t; i++) {
-            for (int j = 0; j <= 9; j++) {
-                dp[i][j] = 0;
-                for (int k = 0; k <= j; k++) {
+        
+	    for (int i = 2; i <= n; i++) {
+            for (int j = 0; j < 10; j++) {
+                for (int k = j; k < 10; k++) {
                     dp[i][j] += dp[i-1][k];
                 }
                 dp[i][j] %= 10007;
             }
         }
-
-        long result = 0;
-        for (int i = 0; i <= 9; i++) {
-            result += dp[t][i];
+        int res = 0;
+        for (int i = 0; i < 10; i++) {
+            res += dp[n][i];
         }
-        result %= 10007;
-        System.out.println(result);
+        bw.write(String.valueOf(res % 10007));
+        bw.flush();
     }
-
 }
