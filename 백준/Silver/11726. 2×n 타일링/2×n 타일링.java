@@ -1,22 +1,20 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
+import java.io.*;
 
-public class Main {
-
-    /*
-    2xn = 2x(n-1) + 2x(n-2)
-     */
-    public static void main(String[] args) throws IOException {
+class Main {
+    // 1과 2의 더하기로 만들 수 있는 수열의 개수와 같다.
+    static int[] dp;
+    public static void main(String args[]) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(br.readLine());
-        int[] dp = new int[n+1];
+	dp = new int[n+1];
         dp[0] = 1;
         dp[1] = 1;
         for (int i = 2; i <= n; i++) {
             dp[i] = (dp[i-1] + dp[i-2]) % 10007;
         }
-        System.out.println(dp[n]);
+        bw.write(String.valueOf(dp[n]));
+        bw.flush();
     }
 }
